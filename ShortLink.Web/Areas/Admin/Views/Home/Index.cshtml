@@ -1,0 +1,142 @@
+﻿@using ShortLink.Domain.ViewModels.Link
+@using ShortLink.Application.Utils
+@model Tuple<List<AllLinkViewModel>,int>
+@{
+    ViewData["Title"] = "داشبورد";
+    int i = 0;
+}
+
+
+<form id="formFilter"  method="get" action="/admin/home?pageId=1">
+   
+        <input type="hidden" id="pageid" name="pageId" value="@ViewBag.pageId.ToString()" />
+
+        <section class="content-main">
+            <div class="content-header">
+                <h2 class="content-title"> @ViewData["Title"]</h2>
+                <div>
+                    <a asp-area="Admin" asp-controller="User" asp-action="CreateUser" class="btn btn-primary"><i class="material-icons md-plus"></i> افزودن کاربر</a>
+                </div>
+            </div>
+            <div class="card mb-4">
+                <header class="card-header" dir="ltr">
+                    <div class="row gx-3">
+                        <div class="col-lg-4 col-md-6 me-auto">
+                            <input type="text" name="filter" style="text-align: right" placeholder="جست و جو کنید" class="form-control">
+                            <button>جست و جو</button>
+                        </div>
+                      @*  <div class="col-lg-2 col-md-3 col-6">
+                            <select name="orderBy" id="orderBy" class="form-select">
+                                <option id="select_1" value="Descending">نزولی</option>
+                                <option id="select_2" value="Ascending">صعودی</option>
+                            </select>
+                        </div>*@
+
+                        <div class="col-lg-2 col-md-3 col-6">
+                            <select name="take" id="take" class="form-select">
+                                @* <option id="select_5"  value="5">نمایش 5</option>
+                                <option id="select_10" value="10">نمایش 10</option>
+                                <option id="select_20" value="20">نمایش 20</option>
+                                <option id="select_40" value="40">نمایش 40</option>
+                                <option id="select_60" value="60">نمایش 60</option>
+                                <option id="select_80" value="80">نمایش 80</option>*@
+                                <option id="select_50" value="50">نمایش 50</option>
+
+                            </select>
+                        </div>
+                    </div>
+                </header>
+                <!-- card-header end// -->
+            <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>URL اصلی</th>
+                                    <th>توکن ایجاد شده</th>
+                                    <th>لینک کوتاه شده</th>
+                                    <th>تاریخ ایجاد لینک</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    @foreach (var link in Model.Item1)
+                                    {
+                                    <tr>
+                                        <td>@(i+=1)</td>
+                                        <td>@link.OrginalUrl</td>
+                                        <td>@link.Token</td>
+                                        <td>@link.Value</td>
+                                        <td>@link.CreateDate.ToShamsi()</td>
+                                    </tr>
+                                    }
+
+                            </tbody>
+                        </table>
+                        <!-- table-responsive.// -->
+                </div>
+                </div>
+                <!-- card-body end// -->
+        </div>
+            <!-- card end// -->
+            @if (Model.Item2 > 1)
+            {
+            <div class="pagination-area mt-15 mb-50">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-start">
+                        @for (int i = 1; i <= Model.Item2; i++)
+                        {
+                            <li class="page-item active"><a class="page-link" onclick="changePage(@i)">@i</a></li>
+                        }
+                        <li class="page-item">
+                            <a class="page-link" href="#"><i class="material-icons md-chevron_right"></i></a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            }
+            
+          
+        </section>
+   @* }
+    else
+    {
+        <div class="alert alert-warning">
+            <p>هیچ موردی وجود ندارد</p>
+        </div>
+    }*@
+
+
+</form>
+
+@section scripts
+{
+<script type="text/javascript">
+    function changePage(pageid) {
+        $("#pageid").val(pageid);
+        $("#formFilter").submit()
+    }
+
+   
+
+    document.getElementById('take').onchange = function() {
+        localStorage.setItem('selectedtem', document.getElementById('take').value);
+    };
+
+    if (localStorage.getItem('selectedtem')) {
+        document.getElementById('select_'+localStorage.getItem('selectedtem')).selected = true;
+    } 
+
+
+    //document.getElementById('orderBy').onchange = function() {
+    //    localStorage.setItem('selectedtem', document.getElementById('orderBy').value);
+    //};
+
+    //if (localStorage.getItem('selectedtem')) {
+    //    document.getElementById('select_'+localStorage.getItem('selectedtem')).selected = true;
+    //} 
+
+
+</script>
+}

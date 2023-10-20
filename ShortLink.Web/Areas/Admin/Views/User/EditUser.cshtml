@@ -1,0 +1,72 @@
+﻿@model ShortLink.Application.DTOs.Account.EditUserDTO
+@{
+    ViewData["Title"] = "ویرایش کاربران";
+}
+
+
+
+<section class="content-main card-body ">
+    <div class="row col-lg-10">
+        <div class="col-12  ">
+            <div class="content-header">
+                <h2 class="content-title">@ViewData["Title"]</h2>
+                <div>
+                    <a asp-controller="User" asp-action="Index" class="btn btn-light rounded font-sm mr-5 text-body hover-up">بازگشت به لیست</a>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-12">
+            <form asp-area="Admin" asp-controller="User" asp-action="EditUser" method="post">
+                <input type="hidden" asp-for="UserId" />
+                <div class="card mb-4 ">
+                    <div class="card-body">
+                        <div class="mb-4">
+                            <label asp-for="FirstName" for="product_title" class="form-label"></label>
+                            <input asp-for="FirstName" type="text" placeholder="Type here" class="form-control">
+                            <span class="text-danger" asp-validation-for="FirstName"></span>
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="LastName" for="product_title" class="form-label"></label>
+                            <input asp-for="LastName" type="text" placeholder="Type here" class="form-control">
+                            <span class="text-danger" asp-validation-for="LastName"></span>
+                        </div>
+
+
+
+                        <div class="mb-4">
+                            <label asp-for="Mobile" for="product_title" class="form-label"></label>
+                            <input disabled="" asp-for="Mobile" type="tel" placeholder="Type here" class="form-control">
+                            <span class="text-danger" asp-validation-for="Mobile"></span>
+                        </div>
+
+
+
+                        <div class="mb-4 col-4">
+                            <label asp-for="IsAdmin" class="form-label"></label>
+                            <input asp-for="IsAdmin" type="checkbox" class="form-check-input">
+                        </div>
+                        
+                        <div class="mb-4 col-4">
+                            <label asp-for="IsBlocked" class="form-label"></label>
+                            <input asp-for="IsBlocked" type="checkbox" class="form-check-input">
+                        </div>
+
+
+                        <button class="btn btn-md rounded font-sm hover-up w-100">ویرایش</button>
+
+
+
+                    </div>
+                </div>
+                <!-- card end// -->
+                <!-- card end// -->
+                <!-- card end// -->
+            </form>
+        </div>
+
+    </div>
+</section>
+

@@ -1,0 +1,65 @@
+﻿@model ShortLink.Application.DTOs.Account.LoginUserDTO
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Login";
+}
+
+
+<section class="content-main mt-80 mb-80">
+                <div class="card mx-auto card-login">
+                    <div class="card-body">
+                        <h4 class="card-title mb-4">حساب کاربری خود را بسازید</h4>
+                        <form method="post" class="my-login-validation" asp-controller="Account" asp-action="Login">
+
+                            <div class="mb-3">
+                                <label class="form-label">شماره تلفن</label>
+                                <input  asp-for="Mobile" class="form-control" placeholder="09" type="tel">
+                                <span class="text-danger" asp-validation-for="Mobile"></span>
+
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">رمز عبور</label>
+                                <input  asp-for="Password" class="form-control" placeholder="رمز عبور را وارد کنید" type="password">
+                                <span class="text-danger" asp-validation-for="Password"></span>
+                            </div>
+                            
+                            <div class="row">
+                                
+                                <div class="mb-3 col-5">
+                                    <label class="form-check">
+                                        <span class="form-check-label">به خاطر بسپار</span>
+                                        <input asp-for="RememberMe" type="checkbox" class="form-check-input" checked="">
+                                    </label>
+                                </div>
+                            <div class="mb-3 col-1">
+                                </div>
+                                <div class="mb-3 col-6">
+                                    <a href="#" class="float-end font-sm text-muted">رمز عبور را فراموش کردید؟</a>
+                                </div>
+                            </div>
+
+                           @* <div class="row">
+                                <div class="mb-3">
+                                    <a href="#" class="float-end font-sm text-muted">رمز عبور را فراموش کردید؟</a>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-check">
+                                        <span class="form-check-label">به خاطر بسپار</span>
+                                        <input asp-for="RememberMe" type="checkbox" class="form-check-input" checked="">
+                                    </label>
+                                </div>
+                            </div>*@
+
+                            <div class="mb-4" > 
+                                <button type="submit" class="btn text-center btn-primary w-100">ورود</button>
+                            </div>
+                            <!-- form-group// -->
+                        </form>
+                      
+                        <p style="text-align: left" class="text-center mb-2">حساب ندارید؟ <a  asp-controller="Account" asp-action="Register">ثبت نام کنید</a></p>
+                    </div>
+                </div>
+            </section>
+    
+            

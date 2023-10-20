@@ -1,0 +1,135 @@
+﻿@using ShortLink.Domain.ViewModels.Account
+@model List<UserForShowViewModel>
+
+@{
+    ViewData["Title"] = "لیست کاربران";
+    int i = 0;
+}
+
+@if (Model != null && Model.Any())
+{
+    <section class="content-main">
+    <div class="content-header">
+        <h2 class="content-title"> @ViewData["Title"]</h2>
+        <div>
+            <a asp-area="Admin" asp-controller="User" asp-action="CreateUser" class="btn btn-primary"><i class="material-icons md-plus"></i> افزودن کاربر</a>
+        </div>
+    </div>
+    <div class="card mb-4">
+        <header class="card-header" dir="ltr"  >
+            <div class="row gx-3">
+                <div class="col-lg-4 col-md-6 me-auto">
+                    <input type="text"  style="text-align: right" placeholder="جست و جو کنید" class="form-control">
+                </div>
+                <div class="col-lg-2 col-md-3 col-6">
+                    <select class="form-select">
+                        <option>Status</option>
+                        <option>Active</option>
+                        <option>Disabled</option>
+                        <option>Show all</option>
+                    </select>
+                </div>
+               
+                <div class="col-lg-2 col-md-3 col-6">
+                    <select class="form-select">
+                        <option>Show 20</option>
+                        <option>Show 30</option>
+                        <option>Show 40</option>
+                    </select>
+                </div>
+               
+               
+            </div>
+        </header>
+        <!-- card-header end// -->
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>نام</th>
+                        <th>نام خانوادگی</th>
+                        <th>تلفن همراه</th>
+                        <th>ادمین هست / نیست</th>
+                        <th>بلاک هست /نیست</th>
+                        <th >دستورات</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                    @foreach (var user in Model)
+                    {
+                        <tr>
+                            <td>
+                                <div class="info pl-3">
+                                    <h6 class="mb-0 title">@(i += 1)</h6>
+                                    <small class="text-muted">شناسه کاربر: @user.UserId</small>
+                                </div>
+                            </td>
+                            <td>@user.FirstName</td>
+                            <td>@user.LastName</td>
+                            <td>@user.Mobile</td>
+                            <td>
+                                @if (user.IsAdmin)
+                                {
+                                    <p class="badge rounded-pill alert-success">ادمین هست</p>
+                                }
+                                else
+                                {
+                                    <p class="badge rounded-pill alert-danger">ادمین نیست</p>
+                                }
+                            </td>
+                            <td>
+                                @if (!user.IsBlocked)
+                                {
+                                    <p class="badge rounded-pill alert-success">بلاک نیست</p>
+                                }
+                                else
+                                {
+                                    <p class="badge rounded-pill alert-danger">بلاک هست</p>
+                                }
+                            </td>
+                            <td>
+                                <a asp-area="Admin" asp-controller="User" asp-action="EditUser" asp-route-userId="@user.UserId" class="btn btn-sm btn-brand rounded font-sm mt-15">ویرایش کاربر</a>
+                            </td>
+
+
+                        </tr>
+                    }
+                
+                    </tbody>
+                </table>
+                <!-- table-responsive.// -->
+            </div>
+        </div>
+        <!-- card-body end// -->
+    </div>
+    <!-- card end// -->
+    <div class="pagination-area mt-15 mb-50">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-start">
+                <li class="page-item active"><a class="page-link" href="#">01</a></li>
+                <li class="page-item"><a class="page-link" href="#">02</a></li>
+                <li class="page-item"><a class="page-link" href="#">03</a></li>
+                <li class="page-item"><a class="page-link dot" href="#">...</a></li>
+                <li class="page-item"><a class="page-link" href="#">16</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#"><i class="material-icons md-chevron_right"></i></a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</section>
+}
+else
+{
+    <div class="alert alert-warning">
+        <p>هیچ موردی وجود ندارد</p>
+    </div>
+}
+
+
+
+
+

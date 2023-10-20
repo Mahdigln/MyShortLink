@@ -1,0 +1,58 @@
+﻿@model ShortLink.Domain.ViewModels.Account.UserForShowViewModels;
+@{
+    ViewData["Title"] = " اطلاعات حساب کاربری";
+}
+@section scripts{
+<partial name="_ValidationScriptsPartial" />
+ }
+
+
+
+<section class="content-main card-body ">
+    <div class="row col-lg-10">
+        <div class="col-12  ">
+            <div class="content-header">
+                <h2 class="content-title">@ViewData["Title"]</h2>
+                
+            </div>
+        </div>
+
+
+        <div class="col-12">
+            
+                <div class="card mb-4 ">
+                    <div class="card-body">
+                        <div class="mb-4">
+                            <label asp-for="FirstName" for="product_title" class="form-label"></label>
+                            <input asp-for="FirstName" disabled="" type="text" placeholder="Type here" class="form-control">
+                            <span class="text-danger" asp-validation-for="FirstName"></span>
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="LastName" for="product_title" class="form-label"></label>
+                            <input asp-for="LastName" disabled type="text" placeholder="Type here" class="form-control">
+                            <span class="text-danger" asp-validation-for="LastName"></span>
+                        </div>
+
+
+
+                        <div class="mb-4">
+                            <label asp-for="Mobile" for="product_title" class="form-label"></label>
+                            <input asp-for="Mobile" disabled type="tel" placeholder="Type here" class="form-control">
+                            <span class="text-danger" asp-validation-for="Mobile"></span>
+                        </div>
+
+
+
+
+
+                    </div>
+                </div>
+                <!-- card end// -->
+                <!-- card end// -->
+                <!-- card end// -->
+           
+        </div>
+
+    </div>
+</section>
